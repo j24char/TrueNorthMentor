@@ -1,12 +1,17 @@
 import React, { createContext, useState, useContext } from 'react';
 import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
+// Color palette
+const primaryGrey = '#566970';
+const primaryNavy = '#202938';
+const primaryGold = '#cb9c4c';
+
 const lightColors = {
   background: '#fff',
   text: '#000',
   card: '#f0f0f0',
   border: '#ccc',
-  iconColor: '#39db7a',
+  iconColor: primaryNavy,
 };
 
 const darkColors = {
@@ -14,7 +19,7 @@ const darkColors = {
   text: '#fff',
   card: '#1e1e1e',
   border: '#333',
-  iconColor: '#39db7a',
+  iconColor: primaryGold,
 };
 
 const MyLightTheme = {
@@ -22,8 +27,8 @@ const MyLightTheme = {
   mode: 'light',
   colors: {
     ...DefaultTheme.colors,
-    primary: '#39db7a',
-    secondary: '#457a5a',
+    primary: primaryNavy,
+    secondary: primaryGrey,
     background: '#ffffff',
     card: '#fff',
     text: '#111',
@@ -36,8 +41,8 @@ const MyDarkTheme = {
   mode: 'dark',
   colors: {
     ...DarkTheme.colors,
-    primary: '#39db7a',
-    secondary: '#457a5a',
+    primary: primaryGold,
+    secondary: primaryGrey,
     background: '#1a1a1a',
     card: '#2a2a2a',
     text: '#eee',

@@ -5,16 +5,20 @@ export const commonStyles = StyleSheet.create({
     flex: 1,
     paddingTop: 60,
     alignItems: 'center',
-    backgroundColor: '#f6f8fc',
   },
+  // header: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   marginBottom: 20,
+  // },
   title: {
     fontSize: 26,
     fontWeight: 'bold',
   },
-  subtitle: {
-    fontSize: 18,
-    marginTop: 30,
-  },
+  // subtitle: {
+  //   fontSize: 18,
+  //   marginTop: 30,
+  // },
   challengeCard: {
     backgroundColor: '#fff',
     padding: 20,

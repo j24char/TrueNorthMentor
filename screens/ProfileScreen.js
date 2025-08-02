@@ -194,7 +194,7 @@ export default function ProfileScreen() {
 
   return (
     <View style={[styles.container]}>
-      {loading && <ActivityIndicator size="large" color={colors.primary} />}
+      {loading && <ActivityIndicator size="large" color={colors.primaryNavy} />}
       {/* top left logo */}
       <Image
         source={IconImage}
@@ -235,7 +235,7 @@ export default function ProfileScreen() {
         <Text style={styles.addButtonText}>Change Avatar</Text>
       </TouchableOpacity>
 
-      <Text style={{ marginTop: 20 }}>Username</Text>
+      <Text style={{ color: colors.text, marginTop: 20 }}>Username</Text>
       <TextInput
         style={{
           borderWidth: 1,
@@ -275,7 +275,8 @@ export default function ProfileScreen() {
         {email}
       </Text>
 
-      <TouchableOpacity style={[styles.signInButton, { marginTop: 10 }]}
+      <TouchableOpacity 
+        style={[styles.signInButton, { marginTop: 30 }]}
         onPress={toggleTheme}
       >
         <Text style={styles.addButtonText}>
@@ -291,7 +292,7 @@ export default function ProfileScreen() {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={[styles.signInButton, { backgroundColor: 'lightcoral', marginTop: 10 }]}
+        style={[styles.signInButton, { backgroundColor: 'darkred', marginTop: 20 }]}
         onPress={handleLogout}
       >
         <Text style={[styles.addButtonText, { color: 'white' }]}>Log Out</Text>

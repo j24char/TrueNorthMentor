@@ -4,12 +4,6 @@ import HomeScreen from './screens/HomeScreen';
 //import ProgressScreen from './screens/ProgressScreen';
 import ChallengesScreen from './screens/ChallengesScreen';
 //import ParentDashboardScreen from './screens/ParentDashboardScreen';
-
-
-
-
-
-
 import React, {useEffect, useState} from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //import DashboardScreen from './screens/Dashboard';
@@ -47,31 +41,31 @@ function ProfileStack() {
   );
 }
 
-const MyLightTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#39db7a',
-    secondary: '#457a5a',
-    background: '#f7f7f7',
-    card: '#fff',
-    text: '#111',
-    border: '#ccc',
-  },
-};
+// const MyLightTheme = {
+//   ...DefaultTheme,
+//   colors: {
+//     ...DefaultTheme.colors,
+//     primary: '#202938',
+//     secondary: '#457a5a',
+//     background: '#f7f7f7',
+//     card: '#fff',
+//     text: '#111',
+//     border: '#ccc',
+//   },
+// };
 
-const MyDarkTheme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    primary: '#39db7a',
-    secondary: '#457a5a',
-    background: '#1a1a1a',
-    card: '#2a2a2a',
-    text: '#eee',
-    border: '#555',
-  },
-};
+// const MyDarkTheme = {
+//   ...DarkTheme,
+//   colors: {
+//     ...DarkTheme.colors,
+//     primary: '#39db7a',
+//     secondary: '#457a5a',
+//     background: '#1a1a1a',
+//     card: '#2a2a2a',
+//     text: '#eee',
+//     border: '#555',
+//   },
+// };
 
 export default function App() {
   return (
@@ -84,6 +78,7 @@ export default function App() {
 function MainApp() {
   const [user, setUser] = useState(null);
   const { theme } = useThemeContext();
+  const colors = theme.colors;
 
   useEffect(() => {
     // 1. Check existing session on app startup
@@ -135,7 +130,7 @@ function MainApp() {
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#39db7a',
+          tabBarActiveTintColor: theme.mode === 'dark' ? '#cb9c4c' : '#202938',
           tabBarInactiveTintColor: 'gray',
           tabBarStyle: {
             paddingBottom: 5,

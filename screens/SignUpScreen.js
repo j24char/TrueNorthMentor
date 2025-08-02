@@ -100,7 +100,7 @@ export default function SignUpScreen() {
       <TouchableOpacity
         style={[
           styles.signInButton,
-          { backgroundColor: isValidPassword ? colors.primary : '#ccc' }
+          { backgroundColor: isValidPassword ? colors.primaryNavy : '#ccc' }
         ]}
         onPress={createAccount}
         disabled={!isValidPassword}

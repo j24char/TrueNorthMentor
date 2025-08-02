@@ -4,12 +4,6 @@ import { useTheme } from '@react-navigation/native';
 const { width: screenWidth } = Dimensions.get('window');
 
 // Color palette
-const primary = '#39db7a';
-const secondary = '#457a5a';
-
-const primaryColorNavy = '#00203f';
-const primaryColorMint = '#adefd1';
-
 const primaryGrey = '#566970';
 const primaryNavy = '#202938';
 const primaryGold = '#cb9c4c';
@@ -41,16 +35,20 @@ export default function createStyles(mode) {
       flex: 1,
       padding: 16,
       marginTop: 30,
-      backgroundColor: isDark ? '#121212' : '#fff',
+      //backgroundColor: isDark ? '#121212' : '#fff',
     },
     title: {
-        textAlign: 'center',
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: primaryGold,
-        backgroundColor: primaryGrey,
-        marginTop: 20,
-        marginBottom: 20,
+      //textAlign: 'center',
+      fontSize: 26,
+      fontWeight: 'bold',
+      color: isDark ? primaryGold : primaryNavy,
+      //marginTop: 20,
+      //marginBottom: 20,
+    },
+    subtitle: {
+      color: isDark ? primaryGold : primaryNavy,
+      fontSize: 18,
+      marginTop: 30,
     },
     homeScreenButtons: {
       backgroundColor: primaryNavy,
@@ -66,7 +64,7 @@ export default function createStyles(mode) {
     },
 
     sectionTitle: {
-        color: primary,
+        color: primaryNavy,
         fontSize: 18,
         fontWeight: 'bold',
         marginVertical: 8,
@@ -95,9 +93,11 @@ export default function createStyles(mode) {
     header: {
       fontSize: 24,
       fontWeight: 'bold',
-      color: primary,
+      color: isDark ? primaryGold : primaryNavy,
       marginBottom: 16,
-      backgroundColor: isDark ? '#000' : '#fff',
+      flexDirection: 'row',
+      alignItems: 'center',
+      //backgroundColor: isDark ? '#000' : '#fff',
     },
     centeredText: {
       textAlign: 'center',
@@ -121,7 +121,7 @@ export default function createStyles(mode) {
       color: colors.text,
     },
     primaryButton: {
-      backgroundColor: primary,
+      backgroundColor: primaryNavy,
       padding: 10,
       borderRadius: 8,
       alignItems: 'center',
@@ -131,7 +131,7 @@ export default function createStyles(mode) {
       fontWeight: '600',
     },
     secondaryButton: {
-      backgroundColor: secondary,
+      backgroundColor: primaryGrey,
       padding: 10,
       borderRadius: 8,
       alignItems: 'center',
@@ -173,10 +173,40 @@ export default function createStyles(mode) {
       resizeMode: 'contain',
     },
 
+    // Challenge card formatting:
+    challengeCard: {
+      backgroundColor: isDark ? '#303030' : '#f9f9f9',
+      padding: 20,
+      marginTop: 30,
+      borderRadius: 10,
+      width: '90%',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 6,
+      elevation: 4,
+    },
+    challengeTitle: {
+      color: isDark ? primaryGold : primaryNavy,
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    challengeDesc: {
+      color: isDark ? primaryGold : primaryNavy,
+      marginTop: 10,
+      fontSize: 16,
+    },
+    challengeCat: {
+      color: isDark ? primaryGold : primaryNavy,
+      marginTop: 10,
+      fontStyle: 'italic',
+      color: '#666',
+    },
+
     tile: {
       flexDirection: 'row',
       backgroundColor: isDark ? '#1e1e1e' : '#f9f9f9',
-      color: isDark ? '#fff' : '#000',
+      color: isDark ? primaryGold : primaryNavy,
       borderColor: isDark ? '#555' : '#ccc',
       padding: 16,
       marginTop: 5,
@@ -239,7 +269,7 @@ export default function createStyles(mode) {
       marginBottom: 12,
     },
     saveButton: {
-      backgroundColor: primary,
+      backgroundColor: primaryNavy,
       padding: 12,
       borderRadius: 8,
       marginTop: 10,
@@ -282,8 +312,8 @@ export default function createStyles(mode) {
 
     // Dashboard Screen Styles:
     chartColors: {
-      color: primary,
-      labelColor: primary,
+      color: primaryNavy,
+      labelColor: primaryNavy,
       backgroundColor: isDark ? '#000' : '#fff',
       backgroundGradientFrom: isDark ? '#000' : '#fff',
       backgroundGradientTo: isDark ? '#000' : '#fff',
@@ -291,7 +321,7 @@ export default function createStyles(mode) {
     positionsHeading: {
       fontSize: 18,
       fontWeight: 'bold',
-      color: primary,
+      color: primaryNavy,
       marginTop: 20,
       marginBottom: 4,
       backgroundColor: isDark ? '#000' : '#fff',

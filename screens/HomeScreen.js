@@ -17,8 +17,15 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   useEffect(() => {
+    loadUser();
     selectTodayChallenge();
   }, []);
+
+  async function loadUser() {
+    const { data } = await supabase.auth.getUser();
+    setUser(data.user);
+    console.log("User:", data.user);
+  }
 
   async function selectTodayChallenge() {
     const todayKey = `daily_challenge_${new Date().toISOString().split('T')[0]}`;
@@ -57,10 +64,11 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Image source={IconImage} style={styles.logo} />
-      <Text style={commonStyles.title}>Welcome Back</Text>
-
-      <Text style={commonStyles.subtitle}>Your Progress</Text>
+      <View style={styles.header}>
+        <Image source={IconImage} style={styles.logo} />
+        <Text style={styles.title}>True North Mentor</Text>
+      </View>
+      <Text style={styles.subtitle}>Your Progress</Text>
       <Progress.Bar
         progress={progress}
         width={300}
@@ -69,20 +77,20 @@ export default function HomeScreen() {
         borderRadius={6}
         style={{ marginVertical: 20 }}
       />
-      <Text>{Math.round(progress * 100)}% complete</Text>
+      <Text style={styles.subtitle}>{Math.round(progress * 100)}% complete</Text>
 
       {todayChallenge ? (
-        <View style={commonStyles.challengeCard}>
-          <Text style={commonStyles.challengeTitle}>{todayChallenge.title}</Text>
-          <Text style={commonStyles.challengeDesc}>{todayChallenge.description}</Text>
-          <Text style={commonStyles.challengeCat}>Category: {todayChallenge.category}</Text>
+        <View style={styles.challengeCard}>
+          <Text style={styles.challengeTitle}>{todayChallenge.title}</Text>
+          <Text style={styles.challengeDesc}>{todayChallenge.description}</Text>
+          <Text style={styles.challengeCat}>Category: {todayChallenge.category}</Text>
           <Button
             title="Go to Challenge"
             onPress={() => navigation.navigate('Challenges')}
           />
         </View>
       ) : (
-        <Text style={{ marginTop: 40 }}>All challenges completed! 🎉</Text>
+        <Text style={{ marginTop: 40 }}>All challenges completed!</Text>
       )}
     </View>
   );
