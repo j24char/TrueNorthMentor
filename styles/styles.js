@@ -150,7 +150,7 @@ export default function createStyles(mode) {
       paddingVertical: 12,
       elevation: 5,
     },
-    signInButton: {
+    commonButton: {
       backgroundColor: primaryNavy,
       borderRadius: 30,
       paddingHorizontal: 20,
@@ -159,7 +159,7 @@ export default function createStyles(mode) {
       marginTop: 20,
       elevation: 5,
     },
-    addButtonText: {
+    commonButtonText: {
       color: '#fff',
       fontSize: 16,
       textAlign: 'center',
@@ -203,12 +203,20 @@ export default function createStyles(mode) {
       color: '#666',
     },
 
+
+
+    tileTitle: {
+      fontSize: 16,
+      fontWeight: '600',
+    },
+
+
     tile: {
       flexDirection: 'row',
-      backgroundColor: isDark ? '#1e1e1e' : '#f9f9f9',
-      color: isDark ? primaryGold : primaryNavy,
+      backgroundColor: isDark ? '#303030' : '#f9f9f9',
       borderColor: isDark ? '#555' : '#ccc',
       padding: 16,
+      elevation: 2,
       marginTop: 5,
       marginBottom: 5,
       borderRadius: 12,
@@ -216,28 +224,33 @@ export default function createStyles(mode) {
       justifyContent: 'center',
       borderWidth: 1,
     },
-    tileSymbol: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      color: isDark ? '#fff' : '#000',
-      marginLeft: 20,
-    },
-    tileGainLoss: {
+    tileTitle: {
       fontSize: 16,
-      color: isDark ? '#fff' : '#000',
-      marginLeft: 90,
+      fontWeight: '600',
+      color: isDark ? primaryGold : primaryNavy,
     },
     tileDate: {
       fontSize: 16,
-      color: isDark ? '#fff' : '#000',
+      color: isDark ? primaryGold : primaryNavy,
     },
 
     // MODAL STYLES
-    modalContainer: {
+    overlay: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.6)',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      padding: 20,
+    },
+    modalContainer: {
+      backgroundColor: isDark ? '#303030' : '#f9f9f9',
+      padding: 24,
+      borderRadius: 10,
+      elevation: 5,
+    },
+    modalTitle: {
+      fontSize: 22,
+      fontWeight: 'bold',
+      marginBottom: 12,
     },
     modalContent: {
       width: '90%',
@@ -260,7 +273,12 @@ export default function createStyles(mode) {
       textAlign: 'center',
     },
     modalText: {
-      color: '#fff',
+      color: isDark ? primaryGold : primaryNavy,
+    },
+    modalItalicText: {
+      color: isDark ? primaryGold : primaryNavy,
+      fontStyle: 'italic', 
+      marginTop: 8,
     },
     dateButton: {
       padding: 10,

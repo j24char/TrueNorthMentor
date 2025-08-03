@@ -70,17 +70,17 @@ export default function SignInScreen() {
       />
 
       <TouchableOpacity
-        style={styles.signInButton}
+        style={styles.commonButton}
         onPress={ signIn }
       >
-        <Text style={styles.addButtonText}>Sign In</Text>
+        <Text style={styles.commonButtonText}>Sign In</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
-        style={styles.signInButton}
+        style={styles.commonButton}
         onPress={() => navigation.navigate('SignUp')}
       >
-        <Text style={styles.addButtonText}>
+        <Text style={styles.commonButtonText}>
           Don't have an account? Sign up
         </Text>
       </TouchableOpacity>

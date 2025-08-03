@@ -99,21 +99,21 @@ export default function SignUpScreen() {
 
       <TouchableOpacity
         style={[
-          styles.signInButton,
+          styles.commonButton,
           { backgroundColor: isValidPassword ? colors.primaryNavy : '#ccc' }
         ]}
         onPress={createAccount}
         disabled={!isValidPassword}
       >
-        <Text style={styles.addButtonText}>Create Account</Text>
+        <Text style={styles.commonButtonText}>Create Account</Text>
       </TouchableOpacity>
 
 
       <TouchableOpacity 
-        style={styles.signInButton}
+        style={styles.commonButton}
         onPress={() => navigation.navigate('SignIn')}
       >
-        <Text style={styles.addButtonText}>
+        <Text style={styles.commonButtonText}>
           Already have an account? Sign in
         </Text>
       </TouchableOpacity>

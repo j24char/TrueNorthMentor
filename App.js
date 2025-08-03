@@ -47,6 +47,7 @@ export default function App() {
 
 function MainApp() {
   const [user, setUser] = useState(null);
+  const [session, setSession] = useState(null);
   const { theme } = useThemeContext();
   const colors = theme.colors;
 
@@ -69,6 +70,7 @@ function MainApp() {
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('Auth event:', event);
       if (session) {
+        setSession(session);
         setUser(session.user); // <- update user on login/refresh
       } else {
         setUser(null); // <- clear user on logout

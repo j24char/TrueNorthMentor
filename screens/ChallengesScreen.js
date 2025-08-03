@@ -99,9 +99,9 @@ export default function ChallengesScreen() {
               <TouchableOpacity
                 key={challenge.id}
                 onPress={() => handleTilePress(challenge)}
-                style={tileStyles.tile}
+                style={styles.tile}
               >
-                <Text style={tileStyles.tileTitle}>{challenge.title}</Text>
+                <Text style={styles.tileTitle}>{challenge.title}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -114,19 +114,33 @@ export default function ChallengesScreen() {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <View style={modalStyles.overlay}>
-          <View style={modalStyles.modalContainer}>
+        <View style={styles.overlay}>
+          <View style={styles.modalContainer}>
             {selectedChallenge && (
               <>
-                <Text style={modalStyles.modalTitle}>{selectedChallenge.title}</Text>
-                <Text>{selectedChallenge.description}</Text>
-                <Text style={{ fontStyle: 'italic', marginTop: 8 }}>
+                <Text style={styles.modalTitle}>{selectedChallenge.title}</Text>
+                <Text style={styles.modalText}>{selectedChallenge.description}</Text>
+                <Text style={styles.modalItalicText}>
                   Category: {selectedChallenge.category}
                 </Text>
                 <View style={{ marginTop: 20 }}>
-                  <Button title="Add to my challenges" onPress={handleAddChallenge} />
+                  <TouchableOpacity
+                    style={styles.commonButton}
+                    onPress={handleAddChallenge}
+                  >
+                    <Text style={styles.commonButtonText}>Add to my challenges</Text>
+                  </TouchableOpacity>
+                  
                   <View style={{ marginTop: 10 }} />
-                  <Button title="Close" onPress={() => setModalVisible(false)} />
+                  
+                  <TouchableOpacity
+                    style={styles.commonButton}
+                    onPress={() => setModalVisible(false)}
+                  >
+                    <Text style={styles.commonButtonText}>Close</Text>
+                  </TouchableOpacity>
+                  
+                  {/* <Button title="Close" onPress={() => setModalVisible(false)} /> */}
                 </View>
               </>
             )}
@@ -137,36 +151,24 @@ export default function ChallengesScreen() {
   );
 }
 
-const tileStyles = StyleSheet.create({
-  tile: {
-    backgroundColor: '#cce6ff', // TODO: change this to use primary
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 10,
-    elevation: 2,
-  },
-  tileTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-});
 
-const modalStyles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    padding: 20,
-  },
-  modalContainer: {
-    backgroundColor: 'white',
-    padding: 24,
-    borderRadius: 10,
-    elevation: 5,
-  },
-  modalTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 12,
-  },
-});
+
+// const modalStyles = StyleSheet.create({
+//   overlay: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     backgroundColor: 'rgba(0,0,0,0.5)',
+//     padding: 20,
+//   },
+//   modalContainer: {
+//     backgroundColor: 'white',
+//     padding: 24,
+//     borderRadius: 10,
+//     elevation: 5,
+//   },
+//   modalTitle: {
+//     fontSize: 22,
+//     fontWeight: 'bold',
+//     marginBottom: 12,
+//   },
+// });

@@ -240,10 +240,10 @@ export default function ProfileScreen() {
         </View>
 
         <TouchableOpacity
-          style={styles.signInButton}
+          style={styles.commonButton}
           onPress={pickAvatar}
         >
-          <Text style={styles.addButtonText}>Change Avatar</Text>
+          <Text style={styles.commonButtonText}>Change Avatar</Text>
         </TouchableOpacity>
 
         <Text style={{ color: colors.text, marginTop: 20 }}>Username</Text>
@@ -287,26 +287,26 @@ export default function ProfileScreen() {
         </Text>
 
         <TouchableOpacity 
-          style={[styles.signInButton, { marginTop: 30 }]}
+          style={[styles.commonButton, { marginTop: 30 }]}
           onPress={toggleTheme}
         >
-          <Text style={styles.addButtonText}>
+          <Text style={styles.commonButtonText}>
             Switch to {theme.mode === 'light' ? 'Dark' : 'Light'} Mode
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.signInButton}
+          style={styles.commonButton}
           onPress={saveProfile}
         >
-          <Text style={styles.addButtonText}>Save Profile</Text>
+          <Text style={styles.commonButtonText}>Save Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.signInButton, { backgroundColor: 'darkred', marginTop: 20 }]}
+          style={[styles.commonButton, { backgroundColor: 'darkred', marginTop: 20 }]}
           onPress={handleLogout}
         >
-          <Text style={[styles.addButtonText, { color: 'white' }]}>Log Out</Text>
+          <Text style={[styles.commonButtonText, { color: 'white' }]}>Log Out</Text>
         </TouchableOpacity>
 
       </View>
