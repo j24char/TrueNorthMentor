@@ -1,4 +1,3 @@
-
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 //import ProgressScreen from './screens/ProgressScreen';
@@ -6,9 +5,6 @@ import ChallengesScreen from './screens/ChallengesScreen';
 //import ParentDashboardScreen from './screens/ParentDashboardScreen';
 import React, {useEffect, useState} from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-//import DashboardScreen from './screens/Dashboard';
-//import SearchScreen from './screens/SearchScreen';
-//import SymbolScreen from './screens/SymbolScreen';
 import SignInScreen from './screens/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -41,32 +37,6 @@ function ProfileStack() {
   );
 }
 
-// const MyLightTheme = {
-//   ...DefaultTheme,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#202938',
-//     secondary: '#457a5a',
-//     background: '#f7f7f7',
-//     card: '#fff',
-//     text: '#111',
-//     border: '#ccc',
-//   },
-// };
-
-// const MyDarkTheme = {
-//   ...DarkTheme,
-//   colors: {
-//     ...DarkTheme.colors,
-//     primary: '#39db7a',
-//     secondary: '#457a5a',
-//     background: '#1a1a1a',
-//     card: '#2a2a2a',
-//     text: '#eee',
-//     border: '#555',
-//   },
-// };
-
 export default function App() {
   return (
     <ThemeProvider>
@@ -86,6 +56,10 @@ function MainApp() {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
         setUser(session.user); // <- your logic to store user in state
+        console.log("Session restored");
+      }
+      else {
+        console.log("No session");
       }
     };
 
@@ -140,7 +114,6 @@ function MainApp() {
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Challenges" component={ChallengesScreen} />
-        
         <Tab.Screen
           name="Profile"
           component={ProfileStack}
@@ -162,19 +135,3 @@ function MainApp() {
     </>
   );
 }
-
-
-
-
-
-// export default function App() {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="Login">
-//         <Stack.Screen name="Login" component={LoginScreen} />
-//         <Stack.Screen name="Home" component={HomeScreen} />
-//         <Stack.Screen name="Challenges" component={ChallengesScreen} />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }

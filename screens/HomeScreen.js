@@ -5,7 +5,6 @@ import * as Progress from 'react-native-progress';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import createStyles from '../styles/styles';
-import { commonStyles } from '../styles/common';
 import { useThemeContext } from '../styles/ThemeContext';
 import IconImage from '../assets/TrueNorthIconNoBkgd.png';
 

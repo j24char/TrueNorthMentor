@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, Alert, ActivityIndicator } from 'react-native';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  Image, 
+  Alert, 
+  ActivityIndicator, 
+  KeyboardAvoidingView, 
+  Platform, 
+  Keyboard, 
+  TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { supabase } from '../supabase/client';
 import createStyles from '../styles/styles';
@@ -41,7 +52,6 @@ export default function ProfileScreen() {
     }
   }, [avatarUrl]);
 
-  
   async function loadProfile() {
     const {
       data: { user },
@@ -193,111 +203,113 @@ export default function ProfileScreen() {
   };
 
   return (
-    <View style={[styles.container]}>
-      {loading && <ActivityIndicator size="large" color={colors.primaryNavy} />}
-      {/* top left logo */}
-      <Image
-        source={IconImage}
-        style={styles.logo}
-      />
-      {/* Page Title */}
-      <Text style={[styles.header]}>
-        Edit Profile
-      </Text>
-      
-      <View style={{ alignItems: 'center' }}>
-        <TouchableOpacity onPress={pickAvatar}>
-          {selectedImage ? (
-            <Image 
-              source={{ uri: selectedImage }}
-              style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10, }}
-            />
-          ) : avatarUrl ? (
-            <Image
-              source={{ uri: avatarUrl }}
-              style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10, }}
-            />
-          ) : (
-            <Ionicons
-              name="person-circle-outline"
-              size={100}
-              color={colors.primary}
-              style={{ marginBottom: 10 }}
-            />
-          )}
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity
-        style={styles.signInButton}
-        onPress={pickAvatar}
-      >
-        <Text style={styles.addButtonText}>Change Avatar</Text>
-      </TouchableOpacity>
-
-      <Text style={{ color: colors.text, marginTop: 20 }}>Username</Text>
-      <TextInput
-        style={{
-          borderWidth: 1,
-          borderColor: colors.border,
-          padding: 10,
-          borderRadius: 10,
-          color: colors.text,
-        }}
-        value={username}
-        onChangeText={setUsername}
-        placeholder="Enter username"
-        placeholderTextColor={colors.border}
-      />
-
-      <Text style={{ color: colors.text, marginTop: 20 }}>Bio</Text>
-      <TextInput
-        style={{
-          borderWidth: 1,
-          borderColor: colors.border,
-          padding: 10,
-          borderRadius: 10,
-          color: colors.text,
-        }}
-        value={bio}
-        onChangeText={setBio}
-        placeholder="Enter a short bio"
-        placeholderTextColor={colors.border}
-        multiline
-      />
-
-      <Text style={{
-        color: colors.text,
-        paddingVertical: 10,
-        borderBottomWidth: 1,
-        borderColor: colors.border,
-        }}>
-        {email}
-      </Text>
-
-      <TouchableOpacity 
-        style={[styles.signInButton, { marginTop: 30 }]}
-        onPress={toggleTheme}
-      >
-        <Text style={styles.addButtonText}>
-          Switch to {theme.mode === 'light' ? 'Dark' : 'Light'} Mode
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={[styles.container]}>
+        {loading && <ActivityIndicator size="large" color={colors.primaryNavy} />}
+        {/* top left logo */}
+        <Image
+          source={IconImage}
+          style={styles.logo}
+        />
+        {/* Page Title */}
+        <Text style={[styles.header]}>
+          Edit Profile
         </Text>
-      </TouchableOpacity>
+        
+        <View style={{ alignItems: 'center' }}>
+          <TouchableOpacity onPress={pickAvatar}>
+            {selectedImage ? (
+              <Image 
+                source={{ uri: selectedImage }}
+                style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10, }}
+              />
+            ) : avatarUrl ? (
+              <Image
+                source={{ uri: avatarUrl }}
+                style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 10, }}
+              />
+            ) : (
+              <Ionicons
+                name="person-circle-outline"
+                size={100}
+                color={colors.primary}
+                style={{ marginBottom: 10 }}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
 
-      <TouchableOpacity
-        style={styles.signInButton}
-        onPress={saveProfile}
-      >
-        <Text style={styles.addButtonText}>Save Profile</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.signInButton}
+          onPress={pickAvatar}
+        >
+          <Text style={styles.addButtonText}>Change Avatar</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[styles.signInButton, { backgroundColor: 'darkred', marginTop: 20 }]}
-        onPress={handleLogout}
-      >
-        <Text style={[styles.addButtonText, { color: 'white' }]}>Log Out</Text>
-      </TouchableOpacity>
+        <Text style={{ color: colors.text, marginTop: 20 }}>Username</Text>
+        <TextInput
+          style={{
+            borderWidth: 1,
+            borderColor: colors.border,
+            padding: 10,
+            borderRadius: 10,
+            color: colors.text,
+          }}
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Enter username"
+          placeholderTextColor={colors.border}
+        />
 
-    </View>
+        <Text style={{ color: colors.text, marginTop: 20 }}>Bio</Text>
+        <TextInput
+          style={{
+            borderWidth: 1,
+            borderColor: colors.border,
+            padding: 10,
+            borderRadius: 10,
+            color: colors.text,
+          }}
+          value={bio}
+          onChangeText={setBio}
+          placeholder="Enter a short bio"
+          placeholderTextColor={colors.border}
+          multiline
+        />
+
+        <Text style={{
+          color: colors.text,
+          paddingVertical: 10,
+          borderBottomWidth: 1,
+          borderColor: colors.border,
+          }}>
+          {email}
+        </Text>
+
+        <TouchableOpacity 
+          style={[styles.signInButton, { marginTop: 30 }]}
+          onPress={toggleTheme}
+        >
+          <Text style={styles.addButtonText}>
+            Switch to {theme.mode === 'light' ? 'Dark' : 'Light'} Mode
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.signInButton}
+          onPress={saveProfile}
+        >
+          <Text style={styles.addButtonText}>Save Profile</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.signInButton, { backgroundColor: 'darkred', marginTop: 20 }]}
+          onPress={handleLogout}
+        >
+          <Text style={[styles.addButtonText, { color: 'white' }]}>Log Out</Text>
+        </TouchableOpacity>
+
+      </View>
+    </TouchableWithoutFeedback>
   );
 }

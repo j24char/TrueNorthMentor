@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
-import IconImage from '../assets/icon.png';
+import IconImage from '../assets/TrueNorthIconNoBkgd.png';
 import { Image } from 'react-native';
 import { supabase } from '../supabase/client';
 import { Alert } from 'react-native';

@@ -10,7 +10,7 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import createStyles from '../styles/styles';
 import { supabase } from '../supabase/client';
 
-import IconImage from '../assets/icon.png';
+import IconImage from '../assets/TrueNorthIconNoBkgd.png';
 import { Image } from 'react-native';
 import { useThemeContext } from '../styles/ThemeContext';
 
@@ -30,16 +30,13 @@ export default function SignInScreen() {
       if (error) {
         Alert.alert("Error", error.message);
       } else {
-        
+        console.log('Signed in user ID:', data.user?.id);
         navigation.navigate('Profile', { screen: 'ProfileMain' });
-
       }
     } catch (err) {
       Alert.alert("Unexpected error", err.message || String(err));
     }
   };
-
-
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
