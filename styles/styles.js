@@ -277,6 +277,7 @@ export default function createStyles(mode) {
       color: '#fff',
       marginBottom: 10,
       textAlign: 'center',
+      color: isDark ? primaryGold : primaryNavy,
     },
     modalText: {
       color: isDark ? primaryGold : primaryNavy,

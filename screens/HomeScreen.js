@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, Modal, TouchableOpacity, FlatList } from 'react-native';
 import { supabase } from '../supabase/client';
 import * as Progress from 'react-native-progress';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -13,7 +13,9 @@ export default function HomeScreen() {
   const [progress, setProgress] = useState(0);
   const [user, setUser] = useState(null);
   const [userChallenges, setUserChallenges] = useState([]);
-    const { theme } = useThemeContext();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedChallenge, setSelectedChallenge] = useState(null);
+  const { theme } = useThemeContext();
   const styles = createStyles(theme.mode);
   const navigation = useNavigation();
 
@@ -41,7 +43,9 @@ export default function HomeScreen() {
         id,
         completed_at,
         challenges (
-          title
+          title,
+          description,
+          category
         )
       `)
       .eq('user_id', userId);
@@ -52,6 +56,14 @@ export default function HomeScreen() {
     }
 
     setUserChallenges(data || []);
+    // Calculate progress
+    const now = new Date();
+    const completedCount = challenges.filter(
+      (c) => c.completed_at && new Date(c.completed_at) <= now
+    ).length;
+
+    const progressPercent = challenges.length > 0 ? completedCount / challenges.length : 0;
+    setProgress(progressPercent);
   }
 
   async function selectTodayChallenge() {
@@ -88,27 +100,64 @@ export default function HomeScreen() {
     setTodayChallenge(random);
   }
 
-  // const renderUserChallenge = ({ item }) => (
-  //   <View style={styles.challengeCard}>
-  //     <Text style={styles.challengeTitle}>{item.challenges.title}</Text>
-  //     <Text style={styles.challengeDesc}>{item.challenges.description}</Text>
-  //     <Text style={styles.challengeCat}>Category: {item.challenges.category}</Text>
-  //   </View>
-  // );
+  const handleCompleteChallenge = async () => {
+    if (!selectedChallenge) return;
+
+    try {
+      const { error } = await supabase
+        .from('user_challenges')
+        .update({ completed_at: new Date().toISOString() }) // set current timestamp
+        .eq('id', selectedChallenge.id);
+
+      if (error) {
+        console.error('Error marking challenge complete:', error);
+        return;
+      }
+
+      // Update local state to reflect change immediately
+      setUserChallenges((prev) =>
+        prev.map((c) =>
+          c.id === selectedChallenge.id
+            ? { ...c, completed_at: new Date().toISOString() }
+            : c
+        )
+      );
+
+      // Update progress
+      const completedCount = userChallenges.filter(
+        (c) =>
+          (c.completed_at && new Date(c.completed_at) <= new Date()) ||
+          c.id === selectedChallenge.id
+      ).length;
+      const progressPercent =
+        userChallenges.length > 0 ? completedCount / userChallenges.length : 0;
+      setProgress(progressPercent);
+
+      setModalVisible(false); // close modal
+    } catch (err) {
+      console.error('Unexpected error completing challenge:', err);
+    }
+  };
+
+
   const renderUserChallenge = ({ item }) => {
     const isCompleted = item.completed_at && new Date(item.completed_at) <= new Date();
 
     return (
-      <View style={styles.row}>
+      <TouchableOpacity
+        style={styles.row}
+        onPress={() => {
+          setSelectedChallenge(item);
+          setModalVisible(true);
+        }}
+      >
         <View style={styles.cell}>
-          <TouchableOpacity style={styles.checkbox}>
-            <View style={[styles.checkboxBox, isCompleted && styles.checkboxChecked]} />
-          </TouchableOpacity>
+          <View style={[styles.checkboxBox, isCompleted && styles.checkboxChecked]} />
         </View>
         <View style={styles.cell}>
           <Text style={styles.common_text}>{item.challenges.title}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -159,6 +208,44 @@ export default function HomeScreen() {
             keyExtractor={(item) => item.id.toString()}
             renderItem={renderUserChallenge}
           />
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.overlay}>
+              <View style={styles.modalContainer}>
+                {selectedChallenge && (
+                  <>
+                    <Text style={styles.modalTitle}>{selectedChallenge.challenges.title}</Text>
+                    <Text style={styles.modalText}>{selectedChallenge.challenges.description}</Text>
+                    <Text style={styles.modalItalicText}>
+                      Category: {selectedChallenge.challenges.category}
+                    </Text>
+                    <View style={{ marginTop: 20 }}>
+                      <TouchableOpacity
+                        style={styles.commonButton}
+                        onPress={handleCompleteChallenge}
+                      >
+                        <Text style={styles.commonButtonText}>Challenge Complete</Text>
+                      </TouchableOpacity>
+
+                      <View style={{ marginTop: 10 }} />
+
+                      <TouchableOpacity
+                        style={styles.commonButton}
+                        onPress={() => setModalVisible(false)}
+                      >
+                        <Text style={styles.commonButtonText}>Close</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </>
+                )}
+              </View>
+            </View>
+          </Modal>
+
         </View>
       ) : (
         <Text style={styles.common_text}>No active challenges</Text>
