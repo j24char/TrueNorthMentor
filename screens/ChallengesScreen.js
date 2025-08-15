@@ -58,7 +58,7 @@ export default function ChallengesScreen() {
   };
 
   const handleAddChallenge = async () => {
-    const user = supabase.auth.getUser(); // returns a promise
+    const user = supabase.auth.getUser(); 
     const { data: userData, error: userError } = await user;
 
     if (userError || !userData?.user) {
@@ -87,8 +87,6 @@ export default function ChallengesScreen() {
     <View style={styles.container}>
       <Image source={IconImage} style={styles.logo} />
       
-      
-
       <ScrollView style={{ width: '100%' }}>
         {Object.keys(groupedChallenges).map((category) => (
           <View key={category} style={{ marginBottom: 20, paddingHorizontal: 10 }}>
@@ -150,25 +148,3 @@ export default function ChallengesScreen() {
     </View>
   );
 }
-
-
-
-// const modalStyles = StyleSheet.create({
-//   overlay: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     backgroundColor: 'rgba(0,0,0,0.5)',
-//     padding: 20,
-//   },
-//   modalContainer: {
-//     backgroundColor: 'white',
-//     padding: 24,
-//     borderRadius: 10,
-//     elevation: 5,
-//   },
-//   modalTitle: {
-//     fontSize: 22,
-//     fontWeight: 'bold',
-//     marginBottom: 12,
-//   },
-// });

@@ -5,7 +5,7 @@ const { width: screenWidth } = Dimensions.get('window');
 
 // Color palette
 const primaryGrey = '#566970';
-const primaryNavy = '#202938';
+const primaryNavy = '#2f405cff';
 const primaryGold = '#cb9c4c';
 
 // const lightColors = {
@@ -49,6 +49,12 @@ export default function createStyles(mode) {
       color: isDark ? primaryGold : primaryNavy,
       fontSize: 18,
       marginTop: 30,
+    },
+    common_text: {
+      color: isDark ? primaryGold : primaryNavy,
+      fontSize: 16,
+      marginTop: 5,
+      marginBottom: 5,
     },
     homeScreenButtons: {
       backgroundColor: primaryNavy,
@@ -155,7 +161,7 @@ export default function createStyles(mode) {
       borderRadius: 30,
       paddingHorizontal: 20,
       paddingVertical: 12,
-      marginBottom: 20,
+      marginBottom: 5,
       marginTop: 20,
       elevation: 5,
     },
@@ -177,7 +183,7 @@ export default function createStyles(mode) {
     challengeCard: {
       backgroundColor: isDark ? '#303030' : '#f9f9f9',
       padding: 20,
-      marginTop: 30,
+      marginTop: 10,
       borderRadius: 10,
       width: '90%',
       shadowColor: '#000',
@@ -344,5 +350,40 @@ export default function createStyles(mode) {
       marginBottom: 4,
       backgroundColor: isDark ? '#000' : '#fff',
     },
+
+    // Home Screen Table Styles:
+    row: {
+      flexDirection: 'row',
+      paddingVertical: 8,
+      borderBottomWidth: 1,
+      borderBottomColor: isDark ? '#555' : '#ccc',
+    },
+    cell: {
+      flex: 1,
+      justifyContent: 'center',
+      
+    },
+    checkboxBox: {
+      width: 20,
+      height: 20,
+      borderWidth: 1,
+      borderColor: isDark ? '#555' : '#ccc',
+    },
+    checkboxChecked: {
+      backgroundColor: '#4caf50',
+    },
+    headerRow: {
+      flexDirection: 'row',
+      borderBottomWidth: 2,
+      borderBottomColor: isDark ? '#555' : '#ccc',
+      paddingVertical: 6,
+      
+    },
+    headerText: {
+      flex: 1,
+      fontWeight: 'bold',
+      color: isDark ? primaryGold : primaryNavy,
+    },
+
   });
 }

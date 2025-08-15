@@ -3,7 +3,7 @@ import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
 // Color palette
 const primaryGrey = '#566970';
-const primaryNavy = '#202938';
+const primaryNavy = '#2f405cff';
 const primaryGold = '#cb9c4c';
 
 const lightColors = {
